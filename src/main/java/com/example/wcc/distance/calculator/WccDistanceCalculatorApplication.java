@@ -8,6 +8,7 @@ import org.springframework.boot.context.properties.EnableConfigurationProperties
 @SpringBootApplication
 @EnableConfigurationProperties(AppConfig.class)
 public class WccDistanceCalculatorApplication {
+
     public static void main(String[] args) {
         SpringApplication.run(WccDistanceCalculatorApplication.class, args);
     }

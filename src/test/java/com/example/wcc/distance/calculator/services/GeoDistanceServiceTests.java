@@ -1,10 +1,13 @@
 package com.example.wcc.distance.calculator.services;
 
+import com.example.wcc.distance.calculator.exceptions.HttpException;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import java.math.BigDecimal;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest
 public class GeoDistanceServiceTests {
@@ -13,10 +16,20 @@ public class GeoDistanceServiceTests {
     private GeoDistanceService geoDistanceService;
 
     @Test
-    public void testCalculateGeoDistance() {
-        String firstPostcode = "SW1A 1AA";
-        String secondPostcode = "EC2A 3LT";
-        double distance = geoDistanceService.calculateGeoDistance(firstPostcode, secondPostcode);
-        assertEquals(0.0, distance, distance);
+    public void calculateGeoDistanceWithCorrectPostcodes() {
+        BigDecimal distance = geoDistanceService.calculateGeoDistance("SW1A 1AA", "EC2A 3LT");
+        assertEquals(BigDecimal.valueOf(4.83), distance);
+    }
+
+    @Test
+    public void calculateGeoDistanceWithWrongPostcodes() {
+        assertThrows(HttpException.class,
+                () -> geoDistanceService.calculateGeoDistance("SW1A", "EC2A"));
+    }
+
+    @Test
+    public void calculateGeoDistanceWithDifferentPostcodes() {
+        BigDecimal distance = geoDistanceService.calculateGeoDistance("AB10 1XG", "AB21 7LN");
+        assertEquals(BigDecimal.valueOf(8.44), distance);
     }
 }
