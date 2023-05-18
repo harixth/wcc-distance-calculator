@@ -1,5 +1,6 @@
 package com.example.wcc.distance.calculator.services;
 
+import com.example.wcc.distance.calculator.entities.GeoDistance;
 import com.example.wcc.distance.calculator.exceptions.HttpException;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,8 +18,8 @@ public class GeoDistanceServiceTests {
 
     @Test
     public void calculateGeoDistanceWithCorrectPostcodes() {
-        BigDecimal distance = geoDistanceService.calculateGeoDistance("SW1A 1AA", "EC2A 3LT");
-        assertEquals(BigDecimal.valueOf(4.83), distance);
+        GeoDistance geoDistance = geoDistanceService.calculateGeoDistance("SW1A 1AA", "EC2A 3LT");
+        assertEquals(BigDecimal.valueOf(4.83), geoDistance.getDistance());
     }
 
     @Test
@@ -29,7 +30,7 @@ public class GeoDistanceServiceTests {
 
     @Test
     public void calculateGeoDistanceWithDifferentPostcodes() {
-        BigDecimal distance = geoDistanceService.calculateGeoDistance("AB10 1XG", "AB21 7LN");
-        assertEquals(BigDecimal.valueOf(8.44), distance);
+        GeoDistance geoDistance = geoDistanceService.calculateGeoDistance("AB10 1XG", "AB21 7LN");
+        assertEquals(BigDecimal.valueOf(8.44), geoDistance.getDistance());
     }
 }
