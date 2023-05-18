@@ -9,7 +9,7 @@ public class GeoDistanceService {
     public double calculateGeoDistance(String firstPostcode, String secondPostcode) throws HttpException {
         try {
             //TODO: Implement calculation of distance between two points on the Earth's surface
-            return 0;
+            return 0.0;
         } catch (Exception e) {
             throw new HttpException(HttpStatus.INTERNAL_SERVER_ERROR, e.getMessage());
         }

@@ -1,9 +1,12 @@
 package com.example.wcc.distance.calculator.utils;
 
+import org.springframework.stereotype.Component;
+
 import static com.example.wcc.distance.calculator.utils.Constants.EARTH_RADIUS;
 
+@Component
 public class CalculationHelper {
-    private double calculateDistance(double latitude, double longitude, double latitude2, double
+    public double calculateDistance(double latitude, double longitude, double latitude2, double
             longitude2) {
         // Using Haversine formula! See Wikipedia;
         double lon1Radians = Math.toRadians(longitude);
