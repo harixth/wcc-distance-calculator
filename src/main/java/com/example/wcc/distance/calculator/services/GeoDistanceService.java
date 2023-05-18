@@ -4,7 +4,7 @@ import com.example.wcc.distance.calculator.entities.GeoDistance;
 import com.example.wcc.distance.calculator.entities.Location;
 import com.example.wcc.distance.calculator.exceptions.HttpException;
 import com.example.wcc.distance.calculator.utils.CalculationHelper;
-import com.example.wcc.distance.calculator.utils.CsvReader;
+import com.example.wcc.distance.calculator.utils.CsvHelper;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.Cacheable;
@@ -21,15 +21,16 @@ public class GeoDistanceService {
     @Autowired
     private CalculationHelper calculationHelper;
 
-    private final Map<String, String[]> postcodes = CsvReader.buildDataMapFromCSV();
+    private final Map<String, String[]> postcodes = CsvHelper.buildDataMapFromCSV();
 
     @Cacheable("distance")
     public GeoDistance calculateGeoDistance(String firstPostcode, String secondPostcode) throws HttpException {
         try {
-            String[] firstCoordinate = postcodes.get(firstPostcode);
-            String[] secondCoordinate = postcodes.get(secondPostcode);
+            String[] firstCoordinate = postcodes.get(firstPostcode.replace(" ", ""));
+            String[] secondCoordinate = postcodes.get(secondPostcode.replace(" ", ""));
             if (firstCoordinate == null || secondCoordinate == null) {
-                throw new HttpException(HttpStatus.NOT_FOUND, "Postcode not found");
+                throw new HttpException(HttpStatus.NOT_FOUND, "Coordinate not found for "
+                        + firstPostcode + " or " + secondPostcode);
             }
             BigDecimal distance = calculationHelper.calculateDistance(Double.parseDouble(firstCoordinate[0]),
                     Double.parseDouble(firstCoordinate[1]),
