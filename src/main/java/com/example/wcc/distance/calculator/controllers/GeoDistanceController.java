@@ -23,7 +23,9 @@ public class GeoDistanceController {
                                                       @PathVariable("postcode2") String secondPostcode) {
         try {
             ObjectMapper objectMapper = new ObjectMapper();
-            String jsonResponse = objectMapper.writeValueAsString(geoDistanceService.calculateGeoDistance(firstPostcode, secondPostcode));
+            String jsonResponse = objectMapper.writeValueAsString(geoDistanceService.calculateGeoDistance(
+                    firstPostcode.replace(" ", ""),
+                    secondPostcode.replace(" ", "")));
             return ResponseEntity.ok(jsonResponse);
         } catch (Exception e) {
             if (e instanceof HttpException) {
