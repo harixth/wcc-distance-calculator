@@ -16,11 +16,11 @@ public class GeoDistanceServiceTests {
     @Autowired
     private GeoDistanceService geoDistanceService;
 
-    /*@Test
+    @Test
     public void calculateGeoDistanceWithCorrectPostcodes() {
-        GeoDistance geoDistance = geoDistanceService.calculateGeoDistance("SW1A 1AA", "EC2A 3LT");
+        GeoDistance geoDistance = geoDistanceService.calculateGeoDistance("SW1A1AA", "EC2A3LT");
         assertEquals(BigDecimal.valueOf(4.83), geoDistance.getDistance());
-    }*/
+    }
 
     @Test
     public void calculateGeoDistanceWithWrongPostcodes() {
@@ -28,9 +28,9 @@ public class GeoDistanceServiceTests {
                 () -> geoDistanceService.calculateGeoDistance("SW1A", "EC2A"));
     }
 
-    /*@Test
+    @Test
     public void calculateGeoDistanceWithDifferentPostcodes() {
-        GeoDistance geoDistance = geoDistanceService.calculateGeoDistance("AB10 1XG", "AB21 7LN");
+        GeoDistance geoDistance = geoDistanceService.calculateGeoDistance("AB101XG", "AB217LN");
         assertEquals(BigDecimal.valueOf(8.44), geoDistance.getDistance());
-    }*/
+    }
 }
