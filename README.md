@@ -41,7 +41,8 @@ Project will be running at http://localhost:8081. Make call to `/swagger-ui/inde
 5. Click on the `Execute` button
 6. The result will be shown on the `Response body` section
 
-You can also use `curl` to test the endpoints. For example:
+
+#### You can also use `curl` to test the endpoints. For example:
 
 1. Retrieve the distance between two postcode
 ```bash
