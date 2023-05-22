@@ -59,9 +59,13 @@ public class GeoDistanceService {
             String[] secondCoordinate = locations.stream().filter(location -> location.getPostalCode().equals(secondPostcode)).map(location ->
                     new String[]{location.getLatitude(), location.getLongitude()}
             ).findFirst().orElse(null);
-            if (firstCoordinate == null || secondCoordinate == null) {
+            if (firstCoordinate == null || firstCoordinate[0] == null || firstCoordinate[1] == null) {
                 throw new HttpException(HttpStatus.NOT_FOUND, "Coordinate not found for "
-                        + firstPostcode + " or " + secondPostcode);
+                        + firstPostcode);
+            }
+            if (secondCoordinate == null || secondCoordinate[0] == null || secondCoordinate[1] == null) {
+                throw new HttpException(HttpStatus.NOT_FOUND, "Coordinate not found for "
+                        + secondPostcode);
             }
             // Calculate distance between both coordinates
             BigDecimal distance = calculationHelper.calculateDistance(Double.parseDouble(firstCoordinate[0]),

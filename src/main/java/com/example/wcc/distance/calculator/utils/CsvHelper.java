@@ -2,15 +2,12 @@ package com.example.wcc.distance.calculator.utils;
 
 import com.example.wcc.distance.calculator.entities.Location;
 import com.example.wcc.distance.calculator.repositories.ILocationRepository;
-import com.opencsv.CSVReader;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.Resource;
 
 import java.io.*;
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
